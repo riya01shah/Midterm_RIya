@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($clothing_name) && !empty($clothing_desc) && !empty($size) && !empty($price) && !empty($color) && !empty($brand) && !empty($material)) {
         $stmt = $conn->prepare("INSERT INTO clothing (ClothingName, ClothingDescription, Size, Price, Color, Brand, Material) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssdsis", $clothing_name, $clothing_desc, $size, $price, $color, $brand, $material);
+        $stmt->bind_param("sssssss", $clothing_name, $clothing_desc, $size, $price, $color, $brand, $material);
 
         if ($stmt->execute()) {
             echo "<div class='alert alert-success'>Clothing item added successfully!</div>";
@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Clothing Item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* General Styles */
@@ -101,6 +103,7 @@ header {
             text-align: center;
             margin: 20px 0;
             color: #de2574;
+            font-weight: 700;
         }
 
         .form-container {
@@ -222,7 +225,7 @@ header {
         </div>
         <div class="form-group">
             <label for="Price">Price</label>
-            <input type="number" id="Price" name="Price" required>
+            <input type="number" step="0.01" id="Price" name="Price" required>
         </div>
         <div class="form-group">
             <label for="Color">Color</label>
